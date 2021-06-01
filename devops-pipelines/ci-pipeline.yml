@@ -47,7 +47,7 @@ stages:
       displayName: 'Publish AML Pipeline'
 
 - stage: 'Trigger_AML_Pipeline'
-  displayName: 'Train and evaluate model'
+  displayName: 'Train, Evaluate, and Register model'
   condition: succeeded()
   variables:
     BUILD_URI: '$(SYSTEM.COLLECTIONURI)$(SYSTEM.TEAMPROJECT)/_build/results?buildId=$(BUILD.BUILDID)'
@@ -72,26 +72,26 @@ stages:
           echo "##vso[task.setvariable variable=AMLPIPELINEID;isOutput=true]$AMLPIPELINEID"
       name: 'getpipelineid'
       displayName: 'Get Pipeline ID'
-#   - job: "Run_ML_Pipeline"
-#     dependsOn: "Get_Pipeline_ID"
-#     displayName: "Trigger ML Training Pipeline"
-#     timeoutInMinutes: 0
-#     pool: server
-#     variables:
-#       AMLPIPELINE_ID: $[ dependencies.Get_Pipeline_ID.outputs['getpipelineid.AMLPIPELINEID'] ]
-#     steps:
-#     - task: ms-air-aiagility.vss-services-azureml.azureml-restApi-task.MLPublishedPipelineRestAPITask@0
-#       displayName: 'Invoke ML pipeline'
-#       inputs:
-#         azureSubscription: '$(WORKSPACE_SVC_CONNECTION)'
-#         PipelineId: '$(AMLPIPELINE_ID)'
-#         ExperimentName: '$(EXPERIMENT_NAME)'
-#         PipelineParameters: '"ParameterAssignments": {"model_name": "$(MODEL_NAME)"}, "tags": {"BuildId": "$(Build.BuildId)", "BuildUri": "$(BUILD_URI)"}, "StepTags": {"BuildId": "$(Build.BuildId)", "BuildUri": "$(BUILD_URI)"}'
-#   - job: "Training_Run_Report"
-#     dependsOn: "Run_ML_Pipeline"
-#     condition: always()
-#     displayName: "Publish artifact if new model was registered"
-#     container: mlops
-#     timeoutInMinutes: 0
-#     steps:
-#     - template: diabetes_regression-publish-model-artifact-template.yml
+  - job: "Run_ML_Pipeline"
+    dependsOn: "Get_Pipeline_ID"
+    displayName: "Trigger ML Training Pipeline"
+    timeoutInMinutes: 0
+    pool: server
+    variables:
+      AMLPIPELINE_ID: $[ dependencies.Get_Pipeline_ID.outputs['getpipelineid.AMLPIPELINEID'] ]
+    steps:
+    - task: ms-air-aiagility.vss-services-azureml.azureml-restApi-task.MLPublishedPipelineRestAPITask@0
+      displayName: 'Invoke ML pipeline'
+      inputs:
+        azureSubscription: '$(WORKSPACE_SVC_CONNECTION)'
+        PipelineId: '$(AMLPIPELINE_ID)'
+        ExperimentName: '$(EXPERIMENT_NAME)'
+        PipelineParameters: '"ParameterAssignments": {"model_name": "$(MODEL_NAME)"}, "tags": {"BuildId": "$(Build.BuildId)", "BuildUri": "$(BUILD_URI)"}, "StepTags": {"BuildId": "$(Build.BuildId)", "BuildUri": "$(BUILD_URI)"}'
+  - job: "Training_Run_Report"
+    dependsOn: "Run_ML_Pipeline"
+    condition: always()
+    displayName: "Publish artifact if new model was registered"
+    container: mlops
+    timeoutInMinutes: 0
+    steps:
+    - template: ci-pipeline-cntd-publish-model-artifact-template.yml
