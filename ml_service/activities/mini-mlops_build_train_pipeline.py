@@ -53,8 +53,7 @@ def prep_platform(debug=False):
     return e, aml_workspace, aml_compute, environment, run_config, datastore_name
 
 def assert_dataset_exists(e, aml_workspace, datastore_name):
-    # Get dataset name
-    dataset_name = e.dataset_name
+    
 
     if dataset_name not in aml_workspace.datasets:
         # This call creates an example CSV from sklearn sample data. If you
@@ -96,7 +95,9 @@ def main():
     
     # Setup Platform
     e, aml_workspace, aml_compute, environment, run_config, datastore_name = prep_platform()
-
+    
+    # Get dataset name
+    dataset_name = e.dataset_name
 
     # Ignore for now, but check how that would work for the customer from ADF
     # assert_dataset_exists(e, aml_workspace, datastore_name)
@@ -124,7 +125,7 @@ def main():
             , '--dataset_version', dataset_version_param
             , '--data_file_path', data_file_path_param
             , '--caller_run_id', caller_run_id_param
-            , '--dataset_name', datastore_name
+            , '--dataset_name', dataset_name
         ]
     )
 
