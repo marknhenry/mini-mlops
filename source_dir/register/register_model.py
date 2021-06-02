@@ -196,7 +196,7 @@ def register_aml_model(
             model_path=model_path,
             tags=tagsValue,
             datasets=[('training data',
-                       Dataset.get_by_id(exp.workspace, dataset_id))])
+                       Dataset.get_by_name(exp.workspace, 'diabetes_ds'))])
         os.chdir("..")
         print(
             "Model registered: {} \nModel Description: {} "
