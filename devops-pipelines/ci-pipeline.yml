@@ -33,23 +33,7 @@ stages:
     container: mlops
     timeoutInMinutes: 0
     steps:
-    # - template: code-quality-template.yml
-    - task: Cache@2
-      inputs:
-        key: 'docker | cache'
-        path: $(Pipeline.Workspace)/docker
-        cacheHitVar: DOCKER_CACHE_HIT
-      displayName: Cache Docker images
-    - script: |
-        docker load -i $(Pipeline.Workspace)/docker/cache.tar
-      displayName: Restore Docker image
-      condition: and(not(canceled()), eq(variables.DOCKER_CACHE_HIT, 'true'))
-    - script: |
-        mkdir -p $(Pipeline.Workspace)/docker
-        docker save -o $(Pipeline.Workspace)/docker/cache.tar cache
-      displayName: Save Docker image
-    condition: and(not(canceled()), or(failed(), ne(variables.DOCKER_CACHE_HIT, 'true')))
-   
+    # - template: code-quality-template.yml   
     - task: AzureCLI@1
       inputs:
         azureSubscription: '$(WORKSPACE_SVC_CONNECTION)'
