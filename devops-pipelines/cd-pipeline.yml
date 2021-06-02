@@ -22,6 +22,7 @@ resources:
       branches:
         include:
         - master
+        - new-cd-pipeline
 
 variables:
 - template: pipelines-variables-template.yml
