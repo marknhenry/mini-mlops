@@ -22,7 +22,8 @@ variables:
 - group: devopsforai-aml-vg
 
 pool:
-  vmImage: ubuntu-latest
+  # vmImage: ubuntu-latest
+  name: DESKTOP-PO0SA6R
 
 stages:
 - stage: 'Model_CI'
@@ -33,7 +34,7 @@ stages:
     container: mlops
     timeoutInMinutes: 0
     steps:
-    # - template: code-quality-template.yml
+    # - template: code-quality-template.yml   
     - task: AzureCLI@1
       inputs:
         azureSubscription: '$(WORKSPACE_SVC_CONNECTION)'
