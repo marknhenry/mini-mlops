@@ -47,7 +47,7 @@ stages:
       displayName: 'Publish AML Pipeline'
 
 - stage: 'Trigger_AML_Pipeline'
-  displayName: 'Train, Evaluate, and Register model'
+  displayName: 'Train, Eval, & Reg Model'
   condition: succeeded()
   variables:
     BUILD_URI: '$(SYSTEM.COLLECTIONURI)$(SYSTEM.TEAMPROJECT)/_build/results?buildId=$(BUILD.BUILDID)'
