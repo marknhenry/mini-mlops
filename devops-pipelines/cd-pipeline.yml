@@ -135,7 +135,7 @@ stages:
         projectId: '$(resources.pipeline.model-train-ci.projectID)'
         pipelineId: '$(resources.pipeline.model-train-ci.pipelineID)'
         artifactBuildId: ${{ parameters.artifactBuildId }}
-    - template: diabetes_regression-package-model-template.yml
+    - template: pipelines-variables-template.yml
       parameters:
         modelId: $(MODEL_NAME):$(get_model.MODEL_VERSION)
         scoringScriptPath: '$(Build.SourcesDirectory)/$(SOURCES_DIR_TRAIN)/scoring/score.py'
