@@ -90,7 +90,7 @@ stages:
   - job: "Training_Run_Report"
     dependsOn: "Run_ML_Pipeline"
     condition: always()
-    displayName: "Publish artifact if new model was registered"
+    displayName: "Publish Artifacts (If New Model Registered)"
     container: mlops
     timeoutInMinutes: 0
     steps:
