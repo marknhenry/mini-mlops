@@ -113,7 +113,7 @@ variables:
     value: "input"
   # Blobname for the input data - include any applicable path in the string 
   - name: SCORING_DATASTORE_INPUT_FILENAME
-    value: "data/diabetes_scoring_input.csv"
+    value: "diabetes_scoring_input.csv"
   # Blob container where the output data for scoring can be found
   - name: SCORING_DATASTORE_OUTPUT_CONTAINER
     value: "output"
