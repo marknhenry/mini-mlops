@@ -80,9 +80,9 @@ variables:
     value: "conda_dependencies_scorecopy.yml"
     # AML Compute Cluster Config for parallel batch scoring
   - name: AML_ENV_NAME_SCORING
-    value: diabetes_regression_scoring_env
+    value: scoring_env
   - name: AML_ENV_NAME_SCORE_COPY
-    value: diabetes_regression_score_copy_env
+    value: scoring_copy_env
   - name: AML_COMPUTE_CLUSTER_CPU_SKU_SCORING
     value: STANDARD_DS2_V2
   - name: AML_COMPUTE_CLUSTER_NAME_SCORING
@@ -113,7 +113,7 @@ variables:
     value: "input"
   # Blobname for the input data - include any applicable path in the string 
   - name: SCORING_DATASTORE_INPUT_FILENAME
-    value: "diabetes_scoring_input.csv"
+    value: "data/diabetes_scoring_input.csv"
   # Blob container where the output data for scoring can be found
   - name: SCORING_DATASTORE_OUTPUT_CONTAINER
     value: "output"

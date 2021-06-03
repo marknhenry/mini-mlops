@@ -381,7 +381,7 @@ def build_batchscore_pipeline():
 
         published_pipeline = scoring_pipeline.publish(
             name=env.scoring_pipeline_name,
-            description="Diabetes Batch Scoring Pipeline",
+            description="Batch Scoring Pipeline",
         )
         pipeline_id_string = "##vso[task.setvariable variable=pipeline_id;isOutput=true]{}".format(  # NOQA: E501
             published_pipeline.id
@@ -394,3 +394,4 @@ def build_batchscore_pipeline():
 
 if __name__ == "__main__":
     build_batchscore_pipeline()
+    print('Batch Scoring Pipeline Created Successfully')
