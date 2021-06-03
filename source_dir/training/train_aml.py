@@ -29,7 +29,7 @@ import os
 import argparse
 import joblib
 import json
-from train import split_data, train_model, get_model_metrics
+from source_dir.training.train import split_data, train_model, get_model_metrics
 
 
 def register_dataset(
