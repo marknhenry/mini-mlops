@@ -132,7 +132,7 @@ def main():
                 model_name,
                 model_tags,
                 exp,
-                run_id,
+                run_id)
                 # dataset_id)
         elif (build_uri is None):
             register_aml_model(
