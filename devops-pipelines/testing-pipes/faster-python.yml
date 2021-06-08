@@ -15,5 +15,5 @@ steps:
   displayName: 'Upgrade pip'
 
 - script: 
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+    conda env list
+  displayName: 'Conda list dependencies'
