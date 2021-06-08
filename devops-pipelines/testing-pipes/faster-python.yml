@@ -7,13 +7,17 @@ pool:
 steps: 
 - task: UsePythonversion@0
   inputs: 
-    versionSpec: '3.7'
-  displayName: 'Use Python version 3.7'
+    versionSpec: '3.6.5'
+  displayName: 'Use Python version 3.6.5'
 
 - script: 
     python -m pip install --upgrade pip
   displayName: 'Upgrade pip'
 
 - script: 
-    conda env list
-  displayName: 'Conda list dependencies'
+    conda env create -f environment.yml
+  displayName: 'Set up environmnt'
+
+- script: 
+    conda activate py365-mlops
+  displayName: 'Set up environmnt'
