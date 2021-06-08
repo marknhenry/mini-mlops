@@ -15,6 +15,7 @@ steps:
   displayName: 'Upgrade pip'
 
 - script: 
+    pwd
     conda env create -f 'environment.yml'
   displayName: 'Set up environmnt'
 
