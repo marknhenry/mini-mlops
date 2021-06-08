@@ -15,10 +15,10 @@ steps:
   displayName: 'Upgrade pip'
 
 - script: 
-    pwd
+    # pwd
     conda env create -f 'environment.yml'
   displayName: 'Set up environmnt'
 
-- script: 
-    conda activate py365-mlops
-  displayName: 'Set up environmnt'
+# - script: 
+#     conda activate py365-mlops
+#   displayName: 'Set up environmnt'
